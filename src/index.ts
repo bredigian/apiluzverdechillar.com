@@ -1,18 +1,20 @@
+import { $disconnect } from "./db"
+import App from "./app"
+import { DateTime } from "luxon"
 import Express from "express"
-import { config } from "dotenv"
-import cors from "cors"
 
-config()
+const server = Express()
+const app = App(server)
 
-const app = Express()
+const PORT = process.env.PORT ?? 4422
 
-app.use(cors())
-app.use(Express.json())
+app.listen(PORT, () =>
+  console.log(`Server running at PORT ${PORT} at ${DateTime.now().toHTTP()}`)
+)
 
-const PORT = process.env.PORT ?? 3000
-
-app.get("/", (_, res) => {
-  res.json({ message: "Express.js + TypeScript Backend" })
+process.on("SIGINT", async () => {
+  await $disconnect()
+  process.exit(0)
 })
 
-app.listen(PORT, () => console.log(`Server running at PORT ${PORT}`))
+export default app
