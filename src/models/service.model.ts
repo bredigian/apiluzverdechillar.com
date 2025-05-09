@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose"
 
 export const ServiceSchema = new Schema({
+  category: String || null,
   type: String,
   description: String,
   cost: Number || null,
