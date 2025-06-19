@@ -8,8 +8,8 @@ export const Service = {
   getEstimates: async () => {
     return await Estimate.find()
   },
-  updateDates: async (_id: string, from: Date, to: Date) => {
-    return await Estimate.findByIdAndUpdate(_id, { from, to })
+  updateEstimate: async (_id: string, payload: TEstimate) => {
+    return await Estimate.findByIdAndUpdate(_id, payload)
   },
   deleteEstimate: async (_id: string) => {
     return await Estimate.deleteOne({ _id })

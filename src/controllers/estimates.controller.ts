@@ -57,8 +57,8 @@ export const Controller: ControllerProps = {
   updateEstimate: async (req: Request, res: Response) => {
     try {
       const { _id } = req.query
-      const { from, to } = req.body
-      const data = await Service.updateDates(_id as string, from, to)
+      const updatedData = req.body
+      const data = await Service.updateEstimate(_id as string, updatedData)
       res.status(200).json(data)
     } catch (error) {
       if (error) {
