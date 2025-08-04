@@ -6,7 +6,7 @@ export const Service = {
     return await new Estimate(payload).save()
   },
   getEstimates: async () => {
-    return await Estimate.find()
+    return await Estimate.find({}).sort({ createdAt: -1 })
   },
   updateEstimate: async (_id: string, payload: TEstimate) => {
     return await Estimate.findByIdAndUpdate(_id, payload)
